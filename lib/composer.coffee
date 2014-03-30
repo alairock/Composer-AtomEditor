@@ -5,6 +5,7 @@ module.exports =
 
   activate: (state) ->
     @composerView = new ComposerView(state.composerViewState)
+    alert "activated"
 
   deactivate: ->
     @composerView.destroy()
