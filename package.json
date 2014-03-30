@@ -1,14 +1,15 @@
 {
   "name": "composer",
   "main": "./lib/composer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This is a Composer runner for the Atom Editor",
-  "activationEvents": ["composer:toggle"],
+  "activationEvents": [
+    "composer:toggle"
+  ],
   "repository": "https://github.com/alairock/Composer-AtomEditor",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
