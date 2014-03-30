@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "This is a Composer runner for the Atom Editor",
   "activationEvents": ["composer:toggle"],
-  "repository": "https://github.com/atom/composer",
+  "repository": "https://github.com/alairock/Composer-AtomEditor",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
