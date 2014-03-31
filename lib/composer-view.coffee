@@ -1,24 +1,19 @@
 {View} = require 'atom'
 
 module.exports =
+# Internal: The main view for displaying the status from Travis CI.
 class ComposerView extends View
+  # Internal: Build up the HTML contents for the fragment.
   @content: ->
-    @div class: 'composer overlay from-top', =>
-      @div "The Composer package is Alive! It's ALIVE!", class: "message"
+    @div class: "composer-container"
 
-  initialize: (serializeState) ->
-    atom.workspaceView.command "composer:toggle", => @toggle()
 
-  # Returns an object that can be retrieved when package is activated
-  serialize: ->
+  initialize: ->
+    atom.workspaceView.command "composer:destroy", => @destroy()
 
-  # Tear down any state and detach
+  # Internal: Destroy the view and tear down any state.
+  #
+  # Returns nothing.
   destroy: ->
-    @detach()
-
-  toggle: ->
-    console.log "ComposerView was toggled!"
-    if @hasParent()
+    if @isVisible()
       @detach()
-    else
-      atom.workspaceView.append(this)
