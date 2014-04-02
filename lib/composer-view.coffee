@@ -6,7 +6,7 @@ class ComposerView extends View
   # Internal: Build up the HTML contents for the fragment.
   @content: ->
     @div class: "composer-container", =>
-        @button click: 'destroy', class: 'btn pull-right', =>
+        @button click: 'destroy', class: 'btn btn-error pull-right', =>
             @span class: "icon icon-x"
             @span 'close'
 

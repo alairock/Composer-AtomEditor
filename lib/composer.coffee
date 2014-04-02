@@ -9,11 +9,41 @@ module.exports =
         composerExecutablePath: '/usr/local/bin/composer'
 
     activate: ->
+        atom.workspaceView.command "composer:about", => @about()
+        atom.workspaceView.command "composer:archive", => @archive()
+        atom.workspaceView.command "composer:dumpautoload", => @dumpautoload()
+        atom.workspaceView.command "composer:runscript", => @runscript()
+        atom.workspaceView.command "composer:validate", => @validate()
+        atom.workspaceView.command "composer:install", => @install()
         atom.workspaceView.command "composer:update", => @update()
         atom.workspaceView.command "composer:init", => @init()
 
+    about: ->
+        command = 'about'
+        @runner(command)
+
+    archive: ->
+        command = 'archive'
+        @runner(command)
+
+    dumpautoload: ->
+        command = 'dumpautoload'
+        @runner(command)
+
+    runscript: ->
+        command = 'run-script'
+        @runner(command)
+
+    install: ->
+        command = 'install'
+        @runner(command)
+
     update: ->
         command = 'update'
+        @runner(command)
+
+    validate: ->
+        command = 'validate'
         @runner(command)
 
     init: ->
