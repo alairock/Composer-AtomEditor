@@ -53,6 +53,7 @@ module.exports =
     runner: (command, options) ->
         composerPanel = atom.workspaceView.find(".composer-container")
         composerView = new ComposerView
+        atom.workspaceView.find(".composer-contents").html("")
         atom.workspaceView.prependToBottom composerView unless composerPanel.is(":visible")
 
         projectPath = atom.project.getPath()
@@ -71,7 +72,7 @@ module.exports =
             console.log "child process exited with code " + code
 
     writeToPanel: (data) ->
-        atom.workspaceView.find(".composer-container").append("#{data}").scrollToBottom()
+        atom.workspaceView.find(".composer-contents").append("#{data}").scrollToBottom()
 
     replacenl: (replaceThis) ->
         breakTag = "<br>"

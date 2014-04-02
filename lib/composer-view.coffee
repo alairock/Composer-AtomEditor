@@ -9,6 +9,7 @@ class ComposerView extends View
         @button click: 'destroy', class: 'btn btn-error pull-right', =>
             @span class: "icon icon-x"
             @span 'close'
+        @div class: "composer-contents"
 
 
   initialize: ->
