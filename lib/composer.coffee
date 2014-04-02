@@ -9,8 +9,8 @@ module.exports =
         composerExecutablePath: '/usr/local/bin/composer'
 
     activate: ->
-      atom.workspaceView.command "composer:update", => @update()
-      atom.workspaceView.command "composer:init", => @init()
+        atom.workspaceView.command "composer:update", => @update()
+        atom.workspaceView.command "composer:init", => @init()
 
     update: ->
         command = 'update'
@@ -22,7 +22,8 @@ module.exports =
 
     runner: (command, options) ->
         composerPanel = atom.workspaceView.find(".composer-container")
-        atom.workspaceView.prependToBottom new ComposerView unless composerPanel.is(":visible")
+        composerView = new ComposerView
+        atom.workspaceView.prependToBottom composerView unless composerPanel.is(":visible")
 
         projectPath = atom.project.getPath()
         composer = atom.config.get "composer.composerExecutablePath"

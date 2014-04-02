@@ -6,14 +6,13 @@ class ComposerView extends View
   # Internal: Build up the HTML contents for the fragment.
   @content: ->
     @div class: "composer-container", =>
-      @div class: "composer-close-button", =>
-        @text "Close"
+        @button click: 'destroy', class: 'btn pull-right', =>
+            @span class: "icon icon-x"
+            @span 'close'
 
 
   initialize: ->
     atom.workspaceView.command "composer:destroy", => @destroy()
-    atom.workspaceView.find(".composer-close-button").on "click", ->
-      console.log "Hello"
 
   # Internal: Destroy the view and tear down any state.
   #
