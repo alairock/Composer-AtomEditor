@@ -1,80 +1,89 @@
 fs = require 'fs'
-path = require 'path'
-{spawn} = require 'child_process'
+{LineStream} = require 'byline'
+{MessagePanelView, PlainMessageView} = require 'atom-message-panel'
+spawn = require 'cross-spawn'
+strs = require 'stringstream'
 
-ComposerView = require './composer-view'
+class Composer
 
-module.exports =
-    configDefaults:
-        composerExecutablePath: '/usr/local/bin/composer'
+  constructor: ->
+    @view ?= new MessagePanelView
+      title: 'Composer'
 
-    activate: ->
-        atom.workspaceView.command "composer:about", => @about()
-        atom.workspaceView.command "composer:archive", => @archive()
-        atom.workspaceView.command "composer:dumpautoload", => @dumpautoload()
-        atom.workspaceView.command "composer:runscript", => @runscript()
-        atom.workspaceView.command "composer:validate", => @validate()
-        atom.workspaceView.command "composer:install", => @install()
-        atom.workspaceView.command "composer:update", => @update()
-        atom.workspaceView.command "composer:init", => @init()
+  destructor: ->
+    @view.close()
+    @view.remove()
+    delete @view
 
-    about: ->
-        command = 'about'
-        @runner(command)
+  _run: (command) ->
+    closeOnComplete = atom.config.get 'composer.closeOnComplete'
+    composerPath = atom.config.get 'composer.composerPath'
+    firstRun = true
+    [projectPath, ...] = atom.project.getPaths()
 
-    archive: ->
-        command = 'archive'
-        @runner(command)
+    projectPath ?= atom.config.get 'core.projectHome' or
+      fs.getHomeDirectory()
 
-    dumpautoload: ->
-        command = 'dumpautoload'
-        @runner(command)
+    args = [command, '-d', projectPath]
+    childProcess = spawn composerPath, args
+    stdout = childProcess.stdout
+    stderr = childProcess.stderr
 
-    runscript: ->
-        command = 'run-script'
-        @runner(command)
+    onData = (data) =>
+      if firstRun
+        @view.clear()
+        firstRun = false
 
-    install: ->
-        command = 'install'
-        @runner(command)
+      @view.attach()
 
-    update: ->
-        command = 'update'
-        @runner(command)
+      if ~data.indexOf 'Downloading:'
+        [..., message] = @view.messages
+        return if message.message is 'Downloading...'
 
-    validate: ->
-        command = 'validate'
-        @runner(command)
+        @view.add new PlainMessageView
+          message: 'Downloading...'
 
-    init: ->
-        command = 'init'
-        @runner(command)
+      else
+        [messages..., last] = @view.messages
+        if last?.message is 'Downloading...'
+          @view.clear()
+          @view.add message for message in messages
+          @view.add new PlainMessageView
+            message: 'Download complete.'
 
-    runner: (command, options) ->
-        composerPanel = atom.workspaceView.find(".composer-container")
-        composerView = new ComposerView
-        atom.workspaceView.find(".composer-contents").html("")
-        atom.workspaceView.prependToBottom composerView unless composerPanel.is(":visible")
+        @view.add new PlainMessageView
+          message: data
 
-        projectPath = atom.project.getPath()
-        composer = atom.config.get "composer.composerExecutablePath"
-        tail = spawn(composer, [command + ' -d ' + projectPath])
+    stdout.pipe new LineStream
+      .pipe strs 'utf8'
+      .on 'data', onData
 
-        tail.stdout.on "data", (data) =>
-            data = @replacenl(data)
-            @writeToPanel(data)
+    stderr.pipe new LineStream
+      .pipe strs 'utf8'
+      .on 'data', onData
 
-        tail.stderr.on "data", (data) ->
-            console.log "stderr: " + data
+  about: ->
+    @_run 'about'
 
-        tail.on "close", (code) =>
-            @writeToPanel "<br>Complete<br>"
-            console.log "child process exited with code " + code
+  archive: ->
+    @_run 'archive'
 
-    writeToPanel: (data) ->
-        atom.workspaceView.find(".composer-contents").append("#{data}").scrollToBottom()
+  'clear-cache': ->
+    @_run 'clear-cache'
 
-    replacenl: (replaceThis) ->
-        breakTag = "<br>"
-        data = (replaceThis + "").replace /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + breakTag + "$2"
-        return data
+  'dump-autoload': ->
+    @_run 'dump-autoload'
+
+  install: ->
+    @_run 'install'
+
+  'self-update': ->
+    @_run 'self-update'
+
+  update: ->
+    @_run 'update'
+
+  validate: ->
+    @_run 'validate'
+
+module.exports = Composer
