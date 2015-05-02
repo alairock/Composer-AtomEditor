@@ -1,4 +1,4 @@
-## [v0.4.0] - 2015-05-02
+## [vNext] - 2015-05-02
 
 * Add CHANGELOG.md
 * Add Travis-CI support
@@ -14,4 +14,4 @@
   self-update, update, validate.
 * Complete rewrite  
 
-[v0.4.0]: https://github.com/alairock/composer-atomeditor/compare/v0.3.1...v0.4.0
+[vNext]: https://github.com/alairock/composer-atomeditor/compare/v0.3.1...vNext
