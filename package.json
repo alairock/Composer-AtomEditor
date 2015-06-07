@@ -7,7 +7,7 @@
   "main": "lib/main",
   "version": "0.4.0",
   "description": "Run Composer within Atom",
-  "repository": "https://github.com/zimme/atom-composer",
+  "repository": "https://github.com/alairock/Composer-AtomEditor",
   "license": "MIT",
   "engines": {
     "atom": ">=0.196.0 <1.0.0"
