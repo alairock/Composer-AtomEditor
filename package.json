@@ -1,12 +1,33 @@
 {
+  "author": "Skylar Lewis",
+  "contributors": [{
+    "name": "Simon Fridlund"
+  }],
   "name": "composer",
-  "main": "./lib/composer",
-  "version": "0.3.1",
-  "description": "This is a Composer runner for the Atom Editor",
-  "repository": "https://github.com/alairock/Composer-AtomEditor",
+  "main": "lib/main",
+  "version": "0.4.0",
+  "description": "Run Composer within Atom",
+  "repository": "https://github.com/zimme/atom-composer",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=0.196.0 <1.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "atom-message-panel": "^1.2.0",
+    "byline": "^4.2.1",
+    "cross-spawn": "^0.2.9",
+    "stringstream": "0.0.4"
+  },
+  "activationCommands": {
+    "atom-workspace": [
+      "composer:about",
+      "composer:archive",
+      "composer:clear-cache",
+      "composer:dump-autoload",
+      "composer:install",
+      "composer:self-update",
+      "composer:update",
+      "composer:validate"
+    ]
+  }
 }

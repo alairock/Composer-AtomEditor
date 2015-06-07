@@ -1,5 +1,8 @@
-# Composer for Atom Editor
+<!--
+[![Gitter](https://img.shields.io/badge/gitter-join_chat-brightgreen.svg)](https://gitter.im/alairock/composer-atomeditor) [![Travis](https://img.shields.io/travis/zimme/atom-composer.svg)](https://travis-ci.org/alairock/composer-atomeditor) -->
 
-This is the Composer runner for the Atom Editor. Run composer commands in real time inside the atom editor!
+# Composer for Atom
 
-![A screenshot of your spankin' package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+Run [Composer](https://getcomposer.org/) within [Atom](https://atom.io).
+There is only support for commands that are non-interactive and don't require
+arguments.

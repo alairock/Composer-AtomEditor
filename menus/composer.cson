@@ -1,16 +1,35 @@
-# See https://atom.io/docs/latest/creating-a-package#menus for more details
-'context-menu':
-  '.overlayer':
-      'Enable composer': 'composer:toggle'
-
 'menu': [
-  {
-    'label': 'Packages'
+  'label': 'Packages'
+  'submenu': [
+    'label': 'Composer'
     'submenu': [
-      'label': 'composer'
-      'submenu': [
-        { 'label': 'Toggle', 'command': 'composer:toggle' }
-      ]
+      'command': 'composer:about'
+      'label': 'About'
+    ,
+      'command': 'composer:archive'
+      'label': 'Archive'
+    ,
+      'command': 'composer:clear-cache'
+      'label': 'Clear Cache'
+    ,
+      'command': 'composer:dump-autoload'
+      'label': 'Dump Autoload'
+    ,
+      'command': 'composer:install'
+      'label': 'Install'
+    ,
+      'command': 'composer:self-update'
+      'label': 'Self Update'
+    ,
+      'command': 'composer:update'
+      'label': 'Update'
+    ,
+      'command': 'composer:validate'
+      'label': 'Validate'
+    ,
+      'command': 'composer:version'
+      'label': 'Version'
+    ,
     ]
-  }
+  ]
 ]
