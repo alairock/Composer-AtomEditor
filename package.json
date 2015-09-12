@@ -7,7 +7,7 @@
   ],
   "name": "composer",
   "main": "lib/main",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Run Composer within Atom",
   "repository": "https://github.com/alairock/Composer-AtomEditor",
   "license": "MIT",
