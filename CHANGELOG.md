@@ -1,8 +1,17 @@
-## [0.4.1] - 2015-06-08
+## [v0.5.0] - 2015-09-14
+
+  * Add support for adding extra arguments to `install` and `update`
+  * Make sure all commands are non-interactive
+
+## [v0.4.2] - 2015-09-12
+
+  * Update atom engine constraints
+
+## [v0.4.1] - 2015-06-08
 
   * Fix CHANGELOG.md
 
-## [0.4.0] - 2015-05-02
+## [v0.4.0] - 2015-05-02
 
   * Add CHANGELOG.md
   * Add Travis-CI support
@@ -18,5 +27,7 @@
     self-update, update, validate.
   * Complete rewrite  
 
-[v0.4.0]: https://github.com/alairock/composer-atomeditor/compare/v0.4.0...0.4.1
+[v0.5.0]: https://github.com/alairock/composer-atomeditor/compare/v0.4.2...0.5.0
+[v0.4.2]: https://github.com/alairock/composer-atomeditor/compare/v0.4.1...0.4.2
+[v0.4.1]: https://github.com/alairock/composer-atomeditor/compare/v0.4.0...0.4.1
 [v0.4.0]: https://github.com/alairock/composer-atomeditor/compare/v0.3.1...0.4.0
