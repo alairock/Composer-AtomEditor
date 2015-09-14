@@ -7,6 +7,11 @@ module.exports =
       default: 'composer'
       title: 'Path to composer executable'
       type: 'string'
+    composerArgs:
+      default: ''
+      title: 'Extra arguments to apply to composer update/install commands, e.g. --prefer-dist'
+      type: 'string'
+
 
   activate: (state) ->
     @composer ?= new Composer
