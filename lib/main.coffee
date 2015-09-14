@@ -8,6 +8,20 @@ module.exports =
       title: 'Path to composer executable'
       type: 'string'
 
+    installExtraArgs:
+      default: []
+      description: 'Comma-separated list of extra args for the install command'
+      items:
+        type: 'string'
+      type: 'array'
+
+    updateExtraArgs:
+      default: []
+      description: 'Comma-separated list of extra args for the update command'
+      items:
+        type: 'string'
+      type: 'array'
+
   activate: (state) ->
     @composer ?= new Composer
 

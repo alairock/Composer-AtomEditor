@@ -15,7 +15,7 @@ class Composer
     @view.remove()
     delete @view
 
-  _run: (command) ->
+  _run: (command, args...) ->
     closeOnComplete = atom.config.get 'composer.closeOnComplete'
     composerPath = atom.config.get 'composer.composerPath'
     firstRun = true
@@ -24,7 +24,7 @@ class Composer
     projectPath ?= atom.config.get 'core.projectHome' or
       fs.getHomeDirectory()
 
-    args = [command, '-d', projectPath, '-n']
+    args = [command, '-d', projectPath, '-n', args...]
     childProcess = spawn composerPath, args
     stdout = childProcess.stdout
     stderr = childProcess.stderr
@@ -75,13 +75,15 @@ class Composer
     @_run 'dump-autoload'
 
   install: ->
-    @_run 'install'
+    installExtraArgs = atom.config.get 'composer.installExtraArgs'
+    @_run 'install', installExtraArgs...
 
   'self-update': ->
     @_run 'self-update'
 
   update: ->
-    @_run 'update'
+    updateExtraArgs = atom.config.get 'composer.updateExtraArgs'
+    @_run 'update', updateExtraArgs...
 
   validate: ->
     @_run 'validate'
