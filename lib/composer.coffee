@@ -18,13 +18,18 @@ class Composer
   _run: (command) ->
     closeOnComplete = atom.config.get 'composer.closeOnComplete'
     composerPath = atom.config.get 'composer.composerPath'
+    composerArgs = atom.config.get 'composer.composerArgs'
     firstRun = true
     [projectPath, ...] = atom.project.getPaths()
 
     projectPath ?= atom.config.get 'core.projectHome' or
       fs.getHomeDirectory()
 
-    args = [command, '-d', projectPath]
+    if command == 'install' || command == 'update'
+      args = [command, '-d', projectPath, composerArgs]
+    else
+      args = [command, '-d', projectPath]
+
     childProcess = spawn composerPath, args
     stdout = childProcess.stdout
     stderr = childProcess.stderr
