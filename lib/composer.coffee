@@ -24,7 +24,7 @@ class Composer
     projectPath ?= atom.config.get 'core.projectHome' or
       fs.getHomeDirectory()
 
-    args = [command, '-d', projectPath]
+    args = [command, '-d', projectPath, '-n']
     childProcess = spawn composerPath, args
     stdout = childProcess.stdout
     stderr = childProcess.stderr
